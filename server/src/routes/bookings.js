@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const asyncHandler = require('express-async-handler');
+const mongoose = require('mongoose');
 const Booking = require('../models/Booking');
 const Service = require('../models/Service');
 const { protect, admin } = require('../middleware/auth');
@@ -15,6 +16,10 @@ router.post(
     let serviceDoc = null;
     let serviceTitle = '';
     if (service) {
+      if (!mongoose.isValidObjectId(service)) {
+        res.status(400);
+        throw new Error('Invalid service ID');
+      }
       serviceDoc = await Service.findById(service);
       if (serviceDoc) serviceTitle = serviceDoc.title;
     }
