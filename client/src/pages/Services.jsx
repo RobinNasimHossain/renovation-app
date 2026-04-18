@@ -23,6 +23,7 @@ export default function Services() {
     api
       .get('/services')
       .then((r) => setServices(r.data.services))
+      .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 

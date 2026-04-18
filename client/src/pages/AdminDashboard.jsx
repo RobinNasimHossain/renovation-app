@@ -43,26 +43,42 @@ export default function AdminDashboard() {
   }, []);
 
   async function updateStatus(id, status) {
-    await api.patch(`/bookings/${id}`, { status });
-    refresh();
+    try {
+      await api.patch(`/bookings/${id}`, { status });
+      refresh();
+    } catch (err) {
+      setError(err?.response?.data?.message || 'Failed to update booking status');
+    }
   }
 
   async function deleteBooking(id) {
     if (!confirm('Delete this booking?')) return;
-    await api.delete(`/bookings/${id}`);
-    refresh();
+    try {
+      await api.delete(`/bookings/${id}`);
+      refresh();
+    } catch (err) {
+      setError(err?.response?.data?.message || 'Failed to delete booking');
+    }
   }
 
   async function deleteService(id) {
     if (!confirm('Delete this service?')) return;
-    await api.delete(`/services/${id}`);
-    refresh();
+    try {
+      await api.delete(`/services/${id}`);
+      refresh();
+    } catch (err) {
+      setError(err?.response?.data?.message || 'Failed to delete service');
+    }
   }
 
   async function deleteProject(id) {
     if (!confirm('Delete this project?')) return;
-    await api.delete(`/projects/${id}`);
-    refresh();
+    try {
+      await api.delete(`/projects/${id}`);
+      refresh();
+    } catch (err) {
+      setError(err?.response?.data?.message || 'Failed to delete project');
+    }
   }
 
   return (

@@ -23,6 +23,7 @@ export default function Projects() {
     api
       .get('/projects')
       .then((r) => setProjects(r.data.projects))
+      .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 
