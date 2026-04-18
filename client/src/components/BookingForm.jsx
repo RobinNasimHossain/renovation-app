@@ -36,7 +36,7 @@ export default function BookingForm({ services = [], selectedServiceId = '' }) {
         state: 'success',
         message: "Thanks! We've received your request and will reach out within one business day.",
       });
-      setForm({ ...defaultForm });
+      setForm({ ...defaultForm, service: selectedServiceId });
     } catch (err) {
       setStatus({
         state: 'error',
